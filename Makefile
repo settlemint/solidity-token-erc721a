@@ -42,7 +42,7 @@ deploy-btp:
 	if [ "$${BTP_EIP_1559_ENABLED}" = "false" ]; then \
 		args="$$args --legacy"; \
 	fi; \
-	forge create ./src/ExampleERC721a.sol:ExampleERC721a ${EXTRA_ARGS} --rpc-url ${BTP_RPC_URL} $$args --constructor-args "GenericTokenMeta" "GTM" "ipfs://bafybeifc23vyo52i6dtlba7u7kmbcpc5oxfcwjaz3oisagq3kq7i2dbo6q/" "0x813af93e50F0bCD2BAaFfa7E4dD4710adC01dE7d" | tee deployment.txt;
+	forge create ./src/ExampleERC721a.sol:ExampleERC721a $${EXTRA_ARGS} --rpc-url $${BTP_RPC_URL} $$args --constructor-args "GenericTokenMeta" "GTM" "ipfs://bafybeifc23vyo52i6dtlba7u7kmbcpc5oxfcwjaz3oisagq3kq7i2dbo6q/" "0x813af93e50F0bCD2BAaFfa7E4dD4710adC01dE7d" | tee deployment.txt;
 
 cast:
 	@echo "Interacting with EVM via Cast..."
