@@ -8,7 +8,7 @@ WORKDIR /
 
 RUN git config --global user.email "hello@settlemint.com" && \
   git config --global user.name "SettleMint" && \
-  forge init usecase --template settlemint/solidity-empty && \
+  forge init usecase --template settlemint/solidity-token-erc721a && \
   cd usecase && \
   forge build
 
