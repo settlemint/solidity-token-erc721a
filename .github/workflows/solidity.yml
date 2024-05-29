@@ -36,7 +36,7 @@ jobs:
     secrets:
       TOKEN: ${{ secrets.GITHUB_TOKEN }}
     with:
-      docker-image-name: solidity-token-erc721
-      runs-on: solidity-token-erc721
-      ignition-module: 'ignition/modules/ExampleERC721.ts'
-      subgraph-contract-address-key: 'ExampleERC721Module#ExampleERC721'
+      docker-image-name: solidity-token-erc721a
+      runs-on: solidity-token-erc721a
+      ignition-module: 'ignition/modules/ExampleERC721a.ts'
+      subgraph-contract-address-key: 'ExampleERC721Module#ExampleERC721a'
