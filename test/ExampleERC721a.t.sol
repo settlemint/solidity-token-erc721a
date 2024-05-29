@@ -133,6 +133,7 @@ contract ExampleERC721Test is Test {
         vm.deal(buyer, exampleERC721.PRICE_IN_WEI_PUBLIC());
         vm.startPrank(buyer);
         exampleERC721.publicMint{value: exampleERC721.PRICE_IN_WEI_PUBLIC()}(1);
+        assertEq(exampleERC721.tokenURI(1), baseTokenURI);
         assertEq(exampleERC721.balanceOf(buyer), 1);
         vm.stopPrank();
         uint256 contractBalance = address(exampleERC721).balance;
@@ -150,5 +151,14 @@ contract ExampleERC721Test is Test {
         exampleERC721.setBaseURI(baseURLRevealed);
         assertEq(exampleERC721.tokenURI(1), revealedTokenURI);
         vm.stopPrank();
+    }
+
+    function testWallet() public {
+        assertEq(exampleERC721.wallet(), wallet);
+    }
+
+    function testSupportsInterface() public {
+        bytes4 interfaceIdERC721 = 0x80ac58cd; // ERC721 interface ID
+        assertTrue(exampleERC721.supportsInterface(interfaceIdERC721));
     }
 }
