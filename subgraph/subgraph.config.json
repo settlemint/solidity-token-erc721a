@@ -1,9 +1,9 @@
 {
-  "output": "generated/solidity-token-erc721a.",
+  "output": "generated/scs.",
   "chain": "localhost",
   "datasources": [
     {
-      "name": "ExampleERC721",
+      "name": "ExampleERC721a",
       "address": "0x0000000000000000000000000000000000000000",
       "startBlock": 0,
       "module": ["erc721", "ownable", "erc721ipfs"]
