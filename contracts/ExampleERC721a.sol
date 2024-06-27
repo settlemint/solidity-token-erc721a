@@ -146,7 +146,7 @@ contract ExampleERC721a is ERC721A, ERC721Whitelist, Ownable, ReentrancyGuard {
     // POST SALE MANAGEMENT                                         //
     //////////////////////////////////////////////////////////////////
 
-    function withdraw() public {
+    function withdraw() public onlyOwner {
         _wallet.transfer(address(this).balance);
     }
 
