@@ -90,6 +90,10 @@ contract ExampleERC721a is ERC721A, ERC721Whitelist, Ownable, ReentrancyGuard {
         _setWhitelistMerkleRoot(whitelistMerkleRoot_);
     }
 
+    function disableWhitelistMerkleRoot() external onlyOwner {
+        _disableWhitelistMerkleRoot();
+    }
+
     function whitelistMint(uint256 count, uint256 allowance, bytes32[] calldata proof) public payable nonReentrant {
         require(_totalMinted() > 0, "Reserves not taken yet");
         require(_totalMinted() + count <= MAX_SUPPLY, "Exceeds max supply");
