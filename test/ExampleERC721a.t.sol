@@ -23,7 +23,7 @@ contract ExampleERC721Test is Test {
         vm.stopPrank();
     }
 
-    function testDeployment() public {
+    function testDeployment() public view {
         assertEq(exampleERC721.name(), "Example Token");
         assertEq(exampleERC721.symbol(), "EXT");
         assertEq(exampleERC721.wallet(), wallet);
@@ -123,12 +123,42 @@ contract ExampleERC721Test is Test {
         vm.stopPrank();
     }
 
-    function testWallet() public {
+    function testWallet() public view {
         assertEq(exampleERC721.wallet(), wallet);
     }
 
-    function testSupportsInterface() public {
+    function testSupportsInterface() public view {
         bytes4 interfaceIdERC721 = 0x80ac58cd; // ERC721 interface ID
         assertTrue(exampleERC721.supportsInterface(interfaceIdERC721));
+    }
+
+    function testDisableWhitelistMerkleRoot() public {
+        vm.prank(owner);
+        exampleERC721.setWhitelistMerkleRoot(0xab0ad1fd11f066c49fc6a47ba91cb9e6acf73026b82a0907c282efbadefd10c2);
+        vm.prank(owner);
+        exampleERC721.disableWhitelistMerkleRoot();
+        assertEq(exampleERC721._whiteListMerkleRoot(), 0x0);
+    }
+
+    function testGetAllowance() public {
+        // Set the whitelist Merkle root
+        vm.prank(owner);
+        exampleERC721.setWhitelistMerkleRoot(0xab0ad1fd11f066c49fc6a47ba91cb9e6acf73026b82a0907c282efbadefd10c2);
+
+        // Use the correct address and allowance
+        address whitelistedAddress = 0x15d34AAf54267DB7D7c367839AAf71A00a2C6A65;
+        string memory allowance = "2";
+
+        // Provide the corresponding Merkle proof
+        bytes32[] memory proof = new bytes32[](1);
+        proof[0] = 0xe49914a3a1644dc92d0362120e4111d4373036cf861e3da9358d6fadafdb64cc;
+
+        // Prank the whitelisted address to call the function
+        vm.startPrank(whitelistedAddress);
+        string memory result = exampleERC721.getAllowance(allowance, proof);
+
+        // Assert that the returned allowance is correct
+        assertEq(result, allowance);
+        vm.stopPrank();
     }
 }
