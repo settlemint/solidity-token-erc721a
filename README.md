@@ -25,40 +25,77 @@
   <br />
 </div>
 
-## Get started
+## Get Started
 
-Launch this smart contract set in SettleMint under the `Smart Contract Sets` section. This will automatically link it to your own blockchain node and make use of the private keys living in the platform.
+This repository provides a feature-rich ERC721A token contract, designed for efficient minting and NFT management. You can either:
 
-If you want to use it separately, bootstrap a new project using
+- **Launch this smart contract set directly in SettleMint**: Under the `Smart Contract Sets` section. This will automatically link the contract to your blockchain node and use the private keys stored in the platform.
+  
+  For detailed instructions on deploying smart contracts using SettleMint, refer to this [deployment guide](https://console.settlemint.com/documentation/docs/using-platform/add_smart_contract_sets/deploying_a_contract/).
 
-```shell
-forge init my-project --template settlemint/solidity-token-erc721a
-```
+- **Integrate it into your own project**:
+  - Bootstrap a new project using Forge:
+    ```shell
+    forge init my-project --template settlemint/solidity-token-erc721a
+    ```
+  - Or, add it as a dependency to your existing project using npm:
+    ```shell
+    npm install @settlemint/solidity-token-erc721a
+    ```
 
-Or if you want to use this set as a dependency of your own,
+### Deploy Contracts & Run Tasks in your Integrated IDE
 
-```shell
-npm install @settlemint/solidity-token-erc721a
-```
+Using SettleMint’s Integrated IDE, you can easily run tasks like compiling, testing, and deploying your contracts. Here’s how to get started:
 
-## DX: Foundry & Hardhat hybrid
+1. Open the Tasks panel by pressing `Cmd + Shift + P` (Mac) or `Ctrl + Shift + P` (Windows/Linux) or by selecting it from the left menu.
+2. Select the desired task from the list. Available tasks include:
 
-**Foundry is a blazing fast, portable and modular toolkit for Ethereum application development written in Rust.**
+   - **Foundry - Compile**: Compiles the Foundry contracts.
+   - **Hardhat - Compile**: Compiles the Hardhat contracts.
+   - **Foundry - Test**: Runs tests using Foundry.
+   - **Hardhat - Test**: Runs tests using Hardhat.
+   - **Foundry - Start Network**: Starts a local Ethereum network using Foundry.
+   - **Hardhat - Start Network**: Starts a local Ethereum network using Hardhat.
+   - **Hardhat - Deploy to Local Network**: Deploys contracts to a local network.
+   - **Hardhat - Deploy to Platform Network**: Deploys contracts to the specified platform network.
+   - **The Graph - Build & Deploy**: Builds and deploys the subgraph.
 
-Foundry consists of:
+Alternatively, you can use the IDE terminal to deploy your contract using common commands from [Hardhat](https://hardhat.org/ignition/docs/guides/deploy) or [Foundry](https://book.getfoundry.sh/forge/deploying).
 
-- **Forge**: Ethereum testing framework (like Truffle, Hardhat and DappTools).
-- **Cast**: Swiss army knife for interacting with EVM smart contracts, sending transactions and getting chain data.
-- **Anvil**: Local Ethereum node, akin to Ganache, Hardhat Network.
-- **Chisel**: Fast, utilitarian, and verbose solidity REPL.
+### Learn More about Foundry and Hardhat
 
-**Hardhat is a Flexible, Extensible, Fast Ethereum development environment for professionals in typescript**
+To fully leverage the capabilities of Foundry and Hardhat, you can explore our comprehensive documentation [here](https://console.settlemint.com/documentation/docs/using-platform/add_smart_contract_sets/smart_contracts/).
 
-Hardhat consists of:
+## ERC721A Contract Features
 
-- **Hardhat Runner**: Hardhat Runner is the main component you interact with when using Hardhat. It's a flexible and extensible task runner that helps you manage and automate the recurring tasks inherent to developing smart contracts and dApps.
-- **Hardhat Ignition**: Declarative deployment system that enables you to deploy your smart contracts without navigating the mechanics of the deployment process.
-- **Hardhat Network**: Declarative deployment system that enables you to deploy your smart contracts without navigating the mechanics of the deployment process.
+This repository includes a customizable ERC721A token contract with the following features, designed for efficient and scalable NFT minting:
+
+- **Efficient Minting**: ERC721A is optimized for gas efficiency, especially for batch minting operations.
+- **Whitelist Support**: Implements a whitelist using Merkle proofs to manage pre-approved addresses during the minting process.
+- **Royalty Support**: Integrates ERC2981 for royalty payments, allowing creators to earn a percentage on secondary sales.
+- **Pausable Minting**: The contract owner can control the start and stop of public sales and whitelist sales.
+- **Reentrancy Guard**: Protects against reentrancy attacks during the minting and withdrawal processes.
+
+### Key Functions
+
+- **`setBaseURI(string memory baseTokenURI_)`**: Sets the base URI for the token metadata.
+- **`collectReserves()`**: Mints a reserved number of tokens for the team or future sale.
+- **`gift(address[] calldata recipients_)`**: Mints tokens as gifts to specified addresses.
+- **`setWhitelistMerkleRoot(bytes32 whitelistMerkleRoot_)`**: Sets the Merkle root for the whitelist.
+- **`disableWhitelistMerkleRoot()`**: Disables the whitelist, transitioning to a public sale.
+- **`whitelistMint(uint256 count, uint256 allowance, bytes32[] calldata proof)`**: Allows whitelisted addresses to mint tokens during the whitelist sale.
+- **`publicMint(uint256 count)`**: Allows public minting of tokens when the public sale is active.
+- **`withdraw()`**: Withdraws the contract’s balance to the designated wallet.
+
+### OpenZeppelin Libraries and Custom Extensions Utilized
+
+This contract leverages the following libraries and custom extensions:
+
+- **ERC721A**: An optimized implementation of the ERC721 standard, designed for more efficient minting.
+- **ERC2981**: Supports the ERC2981 standard for royalty payments on secondary sales.
+- **Ownable**: Manages ownership, restricting access to critical functions.
+- **ReentrancyGuard**: Prevents reentrancy attacks during critical operations.
+- **ERC721Whitelist**: Custom extension to manage a whitelist of addresses using Merkle proofs.
 
 ## Documentation
 
