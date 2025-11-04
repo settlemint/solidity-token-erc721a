@@ -1,13 +1,5 @@
-/**
- * Copyright (C) SettleMint NV - All Rights Reserved
- *
- * Use of this file is strictly prohibited without an active subscription.
- * Distribution of this file, via any medium, is strictly prohibited.
- *
- * For license inquiries, contact hello@settlemint.com
- *
- * SPDX-License-Identifier: UNLICENSED
- */
+// SPDX-License-Identifier: FSL-1.1-MIT
+// SettleMint.com
 pragma solidity ^0.8.24;
 
 import { Context } from "@openzeppelin/contracts/utils/Context.sol";
